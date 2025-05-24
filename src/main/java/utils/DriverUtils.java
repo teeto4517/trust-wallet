@@ -19,7 +19,7 @@ public class DriverUtils {
         capabilities.setCapability("newCommandTimeout", 60);
 
         try {
-            driver = new AppiumDriver(new URL("http://127.0.0.1:4723/"), capabilities);
+            driver = new AppiumDriver(new URL("http://127.0.0.1:4725/wd/hub"), capabilities);
         } catch (MalformedURLException e) {
             throw new RuntimeException("Appium server URL is invalid", e);
         }

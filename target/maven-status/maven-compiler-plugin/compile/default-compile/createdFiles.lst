@@ -1,4 +1,6 @@
+utils/Log.class
 pages/WalletPage.class
+utils/TestListener.class
 utils/DriverUtils.class
 utils/HelperUtil.class
 pages/BasePage.class

@@ -1,12 +1,15 @@
 package tests;
 
 import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.Listeners;
 import org.testng.annotations.Test;
 import pages.WalletPage;
 import utils.HelperUtil;
 import io.appium.java_client.AppiumDriver;
 import utils.DriverUtils;
+import utils.TestListener;
 
+@Listeners(TestListener.class)
 public class WalletTest extends BaseTest {
 
     private WalletPage walletPage;
