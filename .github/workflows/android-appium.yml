@@ -13,8 +13,8 @@ jobs:
     env:
       AVD_NAME: test
       API_LEVEL: 30
-      TARGET: default
-      EMULATOR: pixel
+      TARGET: google_apis
+      EMULATOR: x86
       APP_PATH: src/apps/android/androidAPP.apk
 
     steps:
@@ -33,6 +33,7 @@ jobs:
       - name: Create Android emulator
         run: |
           echo "y" | sdkmanager --install "system-images;android-$API_LEVEL;$TARGET;$EMULATOR"
+          echo "y" | sdkmanager --install "platform-tools" "platforms;android-$API_LEVEL" "build-tools;30.0.3"
           avdmanager create avd -n $AVD_NAME -k "system-images;android-$API_LEVEL;$TARGET;$EMULATOR" --force
 
       - name: Start emulator
