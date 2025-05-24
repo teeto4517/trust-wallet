@@ -30,27 +30,46 @@ jobs:
       - name: Download Android SDK tools
         uses: android-actions/setup-android@v3
 
+      - name: Install Android SDK components
+        run: |
+          echo "y" | sdkmanager --update
+          echo "y" | sdkmanager --install "platform-tools" "platforms;android-$API_LEVEL" "build-tools;30.0.3"
+          echo "y" | sdkmanager --install "system-images;android-$API_LEVEL;$TARGET;$EMULATOR"
+          echo "y" | sdkmanager --install "emulator"
+          echo "y" | sdkmanager --install "extras;android;m2repository"
+          echo "y" | sdkmanager --install "extras;google;m2repository"
+
       - name: Create Android emulator
         run: |
-          echo "y" | sdkmanager --install "system-images;android-$API_LEVEL;$TARGET;$EMULATOR"
-          echo "y" | sdkmanager --install "platform-tools" "platforms;android-$API_LEVEL" "build-tools;30.0.3"
+          echo "Creating AVD..."
           avdmanager create avd -n $AVD_NAME -k "system-images;android-$API_LEVEL;$TARGET;$EMULATOR" --force
+          echo "AVD created successfully"
+          avdmanager list avd
 
       - name: Start emulator
         run: |
-          nohup emulator -avd $AVD_NAME -no-window -no-audio -no-boot-anim &
+          echo "Starting emulator..."
+          nohup emulator -avd $AVD_NAME -no-window -no-audio -no-boot-anim -no-snapshot -gpu swiftshader_indirect &
+          echo "Waiting for device..."
           adb wait-for-device
+          echo "Disabling animations..."
           adb shell settings put global window_animation_scale 0
           adb shell settings put global transition_animation_scale 0
           adb shell settings put global animator_duration_scale 0
+          echo "Emulator started successfully"
 
       - name: Wait for emulator to boot
         run: |
-          bootanim="$(adb shell getprop init.svc.bootanim)"
+          echo "Waiting for boot animation to complete..."
+          bootanim=""
           until [ "$bootanim" = "stopped" ]; do
+            bootanim=$(adb shell getprop init.svc.bootanim 2>&1)
+            echo "Boot animation status: $bootanim"
             sleep 5
-            bootanim="$(adb shell getprop init.svc.bootanim)"
           done
+          echo "Boot animation completed"
+          adb shell input keyevent 82
+          echo "Emulator is ready"
 
       - name: Install Appium
         run: |
