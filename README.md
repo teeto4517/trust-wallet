@@ -1,5 +1,7 @@
 # Sample Mobile Automation Framework
 
+> **Note:** The APK file is not included in this repository due to GitHub's 100 MB file size limit. To run tests locally, place your APK file (e.g., `androidAPP.apk`) in the directory `src/apps/android/`. Update your test configuration or driver setup if your APK has a different name or location.
+
 This project is a Java-based mobile automation framework using Appium, Selenium, and TestNG. It follows the Page Object Model (POM) design pattern and includes robust logging and reporting features.
 
 ## Features
