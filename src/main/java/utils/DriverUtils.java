@@ -13,11 +13,13 @@ public class DriverUtils {
         DesiredCapabilities capabilities = new DesiredCapabilities();
         capabilities.setCapability("app", System.getProperty("user.dir") + "/src/apps/android/androidAPP.apk");
         capabilities.setCapability("platformName", "Android");
-        capabilities.setCapability("deviceName", "Pixel3A");
+        capabilities.setCapability("deviceName", "emulator-5554");
         capabilities.setCapability("automationName", "UiAutomator2");
+        capabilities.setCapability("noReset", false);
+        capabilities.setCapability("newCommandTimeout", 60);
 
         try {
-            driver = new AppiumDriver(new URL("http://127.0.0.1:4725/wd/hub"), capabilities);
+            driver = new AppiumDriver(new URL("http://127.0.0.1:4723/"), capabilities);
         } catch (MalformedURLException e) {
             throw new RuntimeException("Appium server URL is invalid", e);
         }
