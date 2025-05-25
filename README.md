@@ -69,7 +69,19 @@ This project is a Java-based mobile automation framework using Appium, Selenium,
 - **TestNG Listener:**
   - Logs test events (start, pass, fail) and takes screenshots on failure (saved in the `screenshots/` directory).
 - **Reports:**
+  - **ExtentReports HTML report** is generated at `test-output/extent-report.html` after each test run. Open this file in your browser for a detailed, interactive report including system info, test steps, and screenshots on failure.
   - TestNG HTML and XML reports are generated in `target/surefire-reports/` after each run.
+
+## Config Properties
+- Environment and test configuration is managed via properties files.
+- **Location:** `src/main/resources/config/qa.properties`
+- **Typical properties:**
+  - `PASSCODE=123456` (example passcode for wallet creation)
+  - `ENVIRONMENT=QA` (test environment name)
+  - `PLATFORM=Android` (test platform)
+- **Best Practice:**
+  - Do **not** commit sensitive or environment-specific properties. These files are ignored by git by default (`.gitignore`).
+  - To customize, edit or create your own properties file in `src/main/resources/config/`.
 
 ## Page Object Model
 - Page objects are in `src/main/java/pages/`.

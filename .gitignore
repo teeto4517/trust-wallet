@@ -1,3 +1,9 @@
+# Test output
+test-output/
+
+# VSCode settings
+.vscode/
+
 # APK files
 *.apk
 src/apps/android/*.apk
@@ -34,3 +40,6 @@ buildNumber.properties
 # OS specific files
 .DS_Store
 Thumbs.db 
+
+# Environment config files
+src/main/resources/config/*.properties 

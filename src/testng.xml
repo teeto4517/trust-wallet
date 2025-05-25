@@ -1,5 +1,9 @@
 <!DOCTYPE suite SYSTEM "http://testng.org/testng-1.0.dtd" >
 <suite name="SampleMobileAutomation">
+    <listeners>
+        <listener class-name="utils.Reporter"/>
+        <listener class-name="utils.TestListener"/>
+    </listeners>
     <test name="Test">
         <parameter name="platformName" value="Android"/>
         <classes>
